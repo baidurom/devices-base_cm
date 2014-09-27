@@ -38,6 +38,10 @@
     .parameter "context"
 
     .prologue
+    const/4 v1, 0x0
+
+    goto :goto_baidu_0
+
     .line 52
     :try_start_0
     const-string v1, "com.android.systemui"
@@ -63,6 +67,7 @@
     .line 58
     .end local v0           #uiContext:Landroid/content/Context;
     :goto_0
+    :goto_baidu_0
     return-object v1
 
     .line 55

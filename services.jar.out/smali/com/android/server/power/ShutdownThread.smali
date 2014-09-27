@@ -6,7 +6,8 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;
+        Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;,
+        Lcom/android/server/power/ShutdownThread$BaiduInjector;
     }
 .end annotation
 
@@ -243,6 +244,8 @@
     move-result-object v2
 
     invoke-virtual {v1, v2}, Landroid/app/ProgressDialog;->setMessage(Ljava/lang/CharSequence;)V
+
+    invoke-static {p0, v1}, Lcom/android/server/power/ShutdownThread$BaiduInjector;->rebootProgressDialogBaidu(Landroid/content/Context;Landroid/app/ProgressDialog;)V
 
     .line 298
     :goto_1
@@ -901,6 +904,8 @@
     move-result-object v8
 
     sput-object v8, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/power/ShutdownThread$BaiduInjector;->createRebootDialogBaidu(Landroid/content/Context;)V
 
     .line 214
     :cond_3
@@ -1596,4 +1601,32 @@
     move-exception v2
 
     goto/16 :goto_3
+.end method
+
+.method static synthetic access$sput-sConfirmDialog-38d6d6(Landroid/app/AlertDialog;)Landroid/app/AlertDialog;
+    .locals 0
+    .parameter "x0"
+
+    .prologue
+    sput-object p0, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
+
+    return-object p0
+.end method
+
+.method static synthetic access$sget-mReboot-7ffdb3()Z
+    .locals 1
+
+    .prologue
+    sget-boolean v0, Lcom/android/server/power/ShutdownThread;->mReboot:Z
+
+    return v0
+.end method
+
+.method static synthetic access$sget-mRebootSafeMode-6a6402()Z
+    .locals 1
+
+    .prologue
+    sget-boolean v0, Lcom/android/server/power/ShutdownThread;->mRebootSafeMode:Z
+
+    return v0
 .end method

@@ -58,6 +58,10 @@
 
     invoke-interface {v1, v2, v3}, Lcom/android/internal/policy/impl/keyguard/KeyguardSecurityCallback;->userActivity(J)V
 
+    iget-object v0, p0, Lcom/android/internal/policy/impl/keyguard/KeyguardAbsKeyInputView$2;->this$0:Lcom/android/internal/policy/impl/keyguard/KeyguardAbsKeyInputView;
+
+    invoke-static {v0}, Lcom/android/internal/policy/impl/keyguard/KeyguardAbsKeyInputView$BaiduInjector;->autoVerifyPasswordAndUnlock(Lcom/android/internal/policy/impl/keyguard/KeyguardAbsKeyInputView;)V
+
     .line 130
     :cond_0
     iget-object v1, p0, Lcom/android/internal/policy/impl/keyguard/KeyguardAbsKeyInputView$2;->this$0:Lcom/android/internal/policy/impl/keyguard/KeyguardAbsKeyInputView;

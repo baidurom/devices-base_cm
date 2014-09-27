@@ -8859,6 +8859,10 @@
     .line 563
     const-string v7, "plmn"
 
+    invoke-direct {p0, v2}, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->updatePlmnDisplay(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v2
+
     invoke-virtual {v1, v7, v2}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
 
     .line 564
@@ -9001,4 +9005,48 @@
 
     .line 543
     goto/16 :goto_4
+.end method
+
+.method private updatePlmnDisplay(Ljava/lang/String;)Ljava/lang/String;
+    .locals 2
+    .parameter "plmn"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->ss:Landroid/telephony/ServiceState;
+
+    invoke-virtual {v0}, Landroid/telephony/ServiceState;->getOperatorNumeric()Ljava/lang/String;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_0
+
+    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v1
+
+    invoke-static {v1}, Lcom/android/internal/telephony/SpnHelper;->resourceIdForMnc(I)I
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    invoke-static {}, Landroid/content/res/Resources;->getSystem()Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getText(I)Ljava/lang/CharSequence;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    :goto_0
+    return-object v0
+
+    :cond_0
+    move-object v0, p1
+
+    goto :goto_0
 .end method

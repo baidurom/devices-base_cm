@@ -10,6 +10,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/internal/policy/impl/GlobalActions$BaiduInjector;,
         Lcom/android/internal/policy/impl/GlobalActions$GlobalActionsDialog;,
         Lcom/android/internal/policy/impl/GlobalActions$SilentModeTriStateAction;,
         Lcom/android/internal/policy/impl/GlobalActions$SilentModeToggleAction;,
@@ -1106,10 +1107,12 @@
 
     invoke-virtual {v1, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/GlobalActions$BaiduInjector;->addRebootMenu(Lcom/android/internal/policy/impl/GlobalActions;)V
+
     .line 313
     const-string v1, "power_menu_reboot_enabled"
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
     const/4 v3, -0x2
 
@@ -1149,7 +1152,7 @@
     :cond_0
     const-string v1, "system_profiles_enabled"
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
     const/4 v3, -0x2
 
@@ -1314,6 +1317,8 @@
     iget-object v2, v0, Lcom/android/internal/policy/impl/GlobalActions;->mAirplaneModeOn:Lcom/android/internal/policy/impl/GlobalActions$ToggleAction;
 
     invoke-virtual {v1, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/GlobalActions$BaiduInjector;->addScreenShotMenu(Lcom/android/internal/policy/impl/GlobalActions;)V
 
     .line 406
     :cond_4
@@ -2299,4 +2304,14 @@
     invoke-direct {p0}, Lcom/android/internal/policy/impl/GlobalActions;->handleShow()V
 
     goto :goto_0
+.end method
+
+.method static synthetic access$iget-mKeyguardShowing-38c164(Lcom/android/internal/policy/impl/GlobalActions;)Z
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-boolean v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mKeyguardShowing:Z
+
+    return v0
 .end method

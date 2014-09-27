@@ -91,11 +91,11 @@
     :goto_0
     iget-object v1, p0, Landroid/media/AudioService$10;->this$0:Landroid/media/AudioService;
 
-    new-instance v2, Landroid/view/VolumePanel;
+    new-instance v2, Landroid/view/BaiduVolumePanel;
 
     iget-object v3, p0, Landroid/media/AudioService$10;->this$0:Landroid/media/AudioService;
 
-    invoke-direct {v2, v0, v3}, Landroid/view/VolumePanel;-><init>(Landroid/content/Context;Landroid/media/AudioService;)V
+    invoke-direct {v2, v0, v3}, Landroid/view/BaiduVolumePanel;-><init>(Landroid/content/Context;Landroid/media/AudioService;)V
 
     #setter for: Landroid/media/AudioService;->mVolumePanel:Landroid/view/VolumePanel;
     invoke-static {v1, v2}, Landroid/media/AudioService;->access$9602(Landroid/media/AudioService;Landroid/view/VolumePanel;)Landroid/view/VolumePanel;

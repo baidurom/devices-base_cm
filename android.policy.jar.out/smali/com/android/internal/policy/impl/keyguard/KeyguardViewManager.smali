@@ -6,6 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager$BaiduInjector;,
         Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager$ViewManagerHost;,
         Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager$ShowListener;
     }
@@ -409,6 +410,10 @@
 
     .line 337
     .local v4, flags:I
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager$BaiduInjector;->addNoLimitsFlag(Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;)I
+
+    move-result v4
+
     iget-boolean v2, p0, Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;->mNeedsInput:Z
 
     if-nez v2, :cond_1
@@ -1299,6 +1304,10 @@
 
     invoke-virtual {v1}, Landroid/util/SparseArray;->clear()V
 
+    const/4 v0, 0x0
+
+    invoke-static {p0, v0}, Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager$BaiduInjector;->sendBroadcast(Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;Z)V
+
     .line 549
     iget-object v1, p0, Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;->mKeyguardView:Lcom/android/internal/policy/impl/keyguard/KeyguardHostView;
 
@@ -1699,6 +1708,11 @@
     iget-object v2, p0, Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;->mKeyguardView:Lcom/android/internal/policy/impl/keyguard/KeyguardHostView;
 
     invoke-virtual {v2}, Lcom/android/internal/policy/impl/keyguard/KeyguardHostView;->requestFocus()Z
+
+    const/4 v0, 0x0
+
+    invoke-static {p0, v0}, Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager$BaiduInjector;->sendBroadcast(Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;Z)V
+
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -1824,4 +1838,14 @@
     const/4 v0, 0x0
 
     goto :goto_0
+.end method
+
+.method static synthetic access$iget-mContext-37d236(Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;)Landroid/content/Context;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/policy/impl/keyguard/KeyguardViewManager;->mContext:Landroid/content/Context;
+
+    return-object v0
 .end method

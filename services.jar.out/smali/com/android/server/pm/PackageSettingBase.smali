@@ -1395,3 +1395,50 @@
     .line 270
     return-void
 .end method
+
+.method setUserState(IIZZZLjava/util/HashSet;Ljava/util/HashSet;)V
+    .locals 9
+    .parameter "userId"
+    .parameter "enabled"
+    .parameter "installed"
+    .parameter "stopped"
+    .parameter "notLaunched"
+    .parameter
+    .parameter
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(IIZZZ",
+            "Ljava/util/HashSet",
+            "<",
+            "Ljava/lang/String;",
+            ">;",
+            "Ljava/util/HashSet",
+            "<",
+            "Ljava/lang/String;",
+            ">;)V"
+        }
+    .end annotation
+
+    .prologue
+    move-object v0, p0
+
+    move v1, p1
+
+    move v2, p2
+
+    move v3, p3
+
+    move v4, p4
+
+    move v5, p5
+
+    const/4 v6, 0x0
+
+    move-object v7, p6
+
+    move-object/from16 v8, p7
+
+    invoke-virtual/range {v0 .. v8}, Lcom/android/server/pm/PackageSetting;->setUserState(IIZZZZLjava/util/HashSet;Ljava/util/HashSet;)V
+
+    return-void
+.end method
