@@ -9014,13 +9014,30 @@
     .prologue
     iget-object v0, p0, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->ss:Landroid/telephony/ServiceState;
 
+    invoke-virtual {v0}, Landroid/telephony/ServiceState;->getState()I
+
+    move-result v1
+
+    const/4 v0, 0x1
+
+    if-eq v0, v1, :cond_0
+
+    const/4 v0, 0x2
+
+    if-eq v0, v1, :cond_0
+
+    iget-object v0, p0, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->ss:Landroid/telephony/ServiceState;
+
     invoke-virtual {v0}, Landroid/telephony/ServiceState;->getOperatorNumeric()Ljava/lang/String;
 
     move-result-object v1
 
     if-eqz v1, :cond_0
 
+    :try_start_0
     invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+    :try_end_0
+    .catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0
 
     move-result v1
 
@@ -9046,7 +9063,11 @@
     return-object v0
 
     :cond_0
+    :goto_1
     move-object v0, p1
 
     goto :goto_0
+
+    :catch_0
+    goto :goto_1
 .end method
