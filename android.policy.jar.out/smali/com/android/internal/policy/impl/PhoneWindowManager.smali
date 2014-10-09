@@ -9978,12 +9978,6 @@
     .line 2253
     if-nez v13, :cond_f
 
-    invoke-static {}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->access$sget-mIsFlashlightOn-9f90c5()Z
-
-    move-result v0
-
-    if-nez v0, :cond_baidu_0
-
     .line 2254
     move-object/from16 v0, p0
 
@@ -10120,7 +10114,6 @@
     .line 2288
     .end local v13           #homeWasLongPressed:Z
     :cond_f
-    :cond_baidu_0
     if-eqz p1, :cond_11
 
     invoke-interface/range {p1 .. p1}, Landroid/view/WindowManagerPolicy$WindowState;->getAttrs()Landroid/view/WindowManager$LayoutParams;
