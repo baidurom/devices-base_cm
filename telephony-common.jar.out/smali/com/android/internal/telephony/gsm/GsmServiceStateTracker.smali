@@ -8849,6 +8849,10 @@
     .line 561
     const-string v7, "spn"
 
+    invoke-virtual {p0, v6}, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->updatePlmnOrSpnDisplay(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v6
+
     invoke-virtual {v1, v7, v6}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
 
     .line 562
@@ -8859,7 +8863,7 @@
     .line 563
     const-string v7, "plmn"
 
-    invoke-direct {p0, v2}, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->updatePlmnDisplay(Ljava/lang/String;)Ljava/lang/String;
+    invoke-virtual {p0, v2}, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->updatePlmnOrSpnDisplay(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v2
 
@@ -9005,69 +9009,4 @@
 
     .line 543
     goto/16 :goto_4
-.end method
-
-.method private updatePlmnDisplay(Ljava/lang/String;)Ljava/lang/String;
-    .locals 2
-    .parameter "plmn"
-
-    .prologue
-    iget-object v0, p0, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->ss:Landroid/telephony/ServiceState;
-
-    invoke-virtual {v0}, Landroid/telephony/ServiceState;->getState()I
-
-    move-result v1
-
-    const/4 v0, 0x1
-
-    if-eq v0, v1, :cond_0
-
-    const/4 v0, 0x2
-
-    if-eq v0, v1, :cond_0
-
-    iget-object v0, p0, Lcom/android/internal/telephony/gsm/GsmServiceStateTracker;->ss:Landroid/telephony/ServiceState;
-
-    invoke-virtual {v0}, Landroid/telephony/ServiceState;->getOperatorNumeric()Ljava/lang/String;
-
-    move-result-object v1
-
-    if-eqz v1, :cond_0
-
-    :try_start_0
-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
-    :try_end_0
-    .catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0
-
-    move-result v1
-
-    invoke-static {v1}, Lcom/android/internal/telephony/SpnHelper;->resourceIdForMnc(I)I
-
-    move-result v1
-
-    if-eqz v1, :cond_0
-
-    invoke-static {}, Landroid/content/res/Resources;->getSystem()Landroid/content/res/Resources;
-
-    move-result-object v0
-
-    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getText(I)Ljava/lang/CharSequence;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Ljava/lang/Object;->toString()Ljava/lang/String;
-
-    move-result-object v0
-
-    :goto_0
-    return-object v0
-
-    :cond_0
-    :goto_1
-    move-object v0, p1
-
-    goto :goto_0
-
-    :catch_0
-    goto :goto_1
 .end method
