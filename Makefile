@@ -27,12 +27,12 @@ DENSITY := xxhdpi
 RESOLUTION := 1080x1920
 
 ##############################################################################
-# Default MINI_SYSTEM is false
+# Default MINI_SYSTEM is true
 # Cut the useless resource or not
 # 	if MINI_SYSTEM is true, it will cost much more time to build, and of course
 # the size of system size will be reduced.
 #-----------------------------------------------------------------------------
-MINI_SYSTEM := false
+#MINI_SYSTEM := true
 
 ##############################################################################
 # Defaul NO_SYSTEM_IMG is true
@@ -132,7 +132,7 @@ vendor_modify_jars := framework framework2 pm services telephony-common android.
 # baidu_modify_apps: which base the baidu's apk
 # just override the res, append *.smali.part
 #-----------------------------------------------------------------------------
-baidu_modify_apps := TeleService BaiduServiceFramework Keyguard
+baidu_modify_apps := SettingsProvider Settings TeleService Keyguard SystemUI
 
 ##############################################################################
 # baidu_modify_jars: which base the baidu's jar

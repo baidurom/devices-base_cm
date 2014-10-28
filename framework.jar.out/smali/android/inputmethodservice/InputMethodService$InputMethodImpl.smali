@@ -139,6 +139,10 @@
     .line 417
     iget-object v2, p0, Landroid/inputmethodservice/InputMethodService$InputMethodImpl;->this$0:Landroid/inputmethodservice/InputMethodService;
 
+    invoke-static {v2}, Landroid/inputmethodservice/InputMethodService$BaiduInjector;->finishActionModeIfStarted(Landroid/inputmethodservice/InputMethodService;)V
+
+    iget-object v2, p0, Landroid/inputmethodservice/InputMethodService$InputMethodImpl;->this$0:Landroid/inputmethodservice/InputMethodService;
+
     invoke-virtual {v2}, Landroid/inputmethodservice/InputMethodService;->isInputViewShown()Z
 
     move-result v0

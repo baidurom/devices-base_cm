@@ -31,7 +31,8 @@
         Landroid/app/ActivityThread$NewIntentData;,
         Landroid/app/ActivityThread$ProviderClientRecord;,
         Landroid/app/ActivityThread$ActivityClientRecord;,
-        Landroid/app/ActivityThread$ProviderKey;
+        Landroid/app/ActivityThread$ProviderKey;,
+        Landroid/app/ActivityThread$BaiduInjector;
     }
 .end annotation
 
@@ -6211,6 +6212,8 @@
 
     iput-object v11, v0, Landroid/app/ActivityThread;->mInitialApplication:Landroid/app/Application;
 
+    invoke-static/range {p0 .. p0}, Landroid/app/ActivityThread$BaiduInjector;->lockAppChannelNumberBaidu(Landroid/app/ActivityThread;)V
+
     .line 4451
     move-object/from16 v0, p1
 
@@ -11553,6 +11556,8 @@
     :cond_0
     invoke-static {}, Landroid/os/AsyncTask;->init()V
 
+    invoke-static {v0}, Landroid/app/ActivityThread$BaiduInjector;->multiTheme_freeCanvas(Landroid/app/ActivityThread;)V
+
     .line 5146
     invoke-static {}, Landroid/os/Looper;->loop()V
 
@@ -16042,6 +16047,14 @@
     :cond_6
     invoke-static {v2, p1}, Landroid/app/ActivityThread;->performConfigurationChanged(Landroid/content/ComponentCallbacks2;Landroid/content/res/Configuration;)V
 
+    invoke-virtual {v1, v6}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Landroid/content/ComponentCallbacks2;
+
+    invoke-static {v2}, Landroid/app/ActivityThread$BaiduInjector;->multiTheme_refreshFontCache(Landroid/content/ComponentCallbacks2;)V
+
     .line 3945
     add-int/lit8 v6, v6, 0x1
 
@@ -19030,4 +19043,13 @@
 
     .line 1758
     return-void
+.end method
+
+.method getmResourcesManager()Landroid/app/ResourcesManager;
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Landroid/app/ActivityThread;->mResourcesManager:Landroid/app/ResourcesManager;
+
+    return-object v0
 .end method

@@ -26,7 +26,8 @@
         Lcom/android/server/am/ActivityManagerService$ForegroundToken;,
         Lcom/android/server/am/ActivityManagerService$BadProcessInfo;,
         Lcom/android/server/am/ActivityManagerService$PendingAssistExtras;,
-        Lcom/android/server/am/ActivityManagerService$PendingActivityLaunch;
+        Lcom/android/server/am/ActivityManagerService$PendingActivityLaunch;,
+        Lcom/android/server/am/ActivityManagerService$BaiduInjector;
     }
 .end annotation
 
@@ -727,7 +728,7 @@
     .end annotation
 .end field
 
-.field private final mRecentTasks:Ljava/util/ArrayList;
+.field final mRecentTasks:Ljava/util/ArrayList;
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "Ljava/util/ArrayList",
@@ -4518,6 +4519,12 @@
 
     invoke-virtual {v15, v3}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
 
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, v15
+
+    invoke-direct {v0, v1}, Lcom/android/server/am/ActivityManagerService;->removeIncludeFlags(Landroid/content/Intent;)V
+
     .line 13481
     if-eqz p5, :cond_0
 
@@ -6135,6 +6142,18 @@
 
     .line 13743
     :cond_21
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/server/am/ActivityManagerService;->mLruProcesses:Ljava/util/ArrayList;
+
+    move-object/from16 v0, v34
+
+    move-object/from16 v1, v23
+
+    move-object/from16 v2, v15
+
+    invoke-static {v0, v1, v2, v3}, Lcom/baidu/security/bm/BroadcastManagerService;->filterBroadcastReceiver(Ljava/util/List;Ljava/util/List;Landroid/content/Intent;Ljava/util/ArrayList;)I
+
     invoke-virtual {v15}, Landroid/content/Intent;->getFlags()I
 
     move-result v3
@@ -6208,6 +6227,12 @@
 
     .line 13761
     .local v13, r:Lcom/android/server/am/BroadcastRecord;
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    invoke-static {v3, v13}, Lcom/android/server/am/BaiduBroadcastInjector;->tryHookMessageBroadcast(Landroid/content/Context;Lcom/android/server/am/BroadcastRecord;)V
+
     if-eqz v65, :cond_2b
 
     invoke-virtual {v14, v13}, Lcom/android/server/am/BroadcastQueue;->replaceParallelBroadcastLocked(Lcom/android/server/am/BroadcastRecord;)Z
@@ -6766,6 +6791,12 @@
 
     .line 13856
     .restart local v13       #r:Lcom/android/server/am/BroadcastRecord;
+    move-object/from16 v0, p0
+
+    iget-object v3, v0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    invoke-static {v3, v13}, Lcom/android/server/am/BaiduBroadcastInjector;->tryHookMessageBroadcast(Landroid/content/Context;Lcom/android/server/am/BroadcastRecord;)V
+
     if-eqz v65, :cond_39
 
     invoke-virtual {v14, v13}, Lcom/android/server/am/BroadcastQueue;->replaceOrderedBroadcastLocked(Lcom/android/server/am/BroadcastRecord;)Z
@@ -21747,7 +21778,7 @@
 
     .line 1888
     .local v1, context:Landroid/content/Context;
-    const v4, 0x103006b
+    const v4, #android:style@Theme.DeviceDefault.Light#t
 
     invoke-virtual {v1, v4}, Landroid/content/Context;->setTheme(I)V
 
@@ -58915,6 +58946,8 @@
     .end local v0           #adj:I
     .end local v3           #proc:Lcom/android/server/am/ProcessRecord;
     :cond_8
+    invoke-direct {p0, p1, v4}, Lcom/android/server/am/ActivityManagerService;->killOrphanedProcess([ILjava/lang/String;)V
+
     monitor-exit v9
 
     .line 9065
@@ -62678,6 +62711,12 @@
 
     .line 13323
     .local v9, r:Lcom/android/server/am/BroadcastRecord;
+    move-object/from16 v0, p0
+
+    iget-object v4, v0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    invoke-static {v4, v9}, Lcom/android/server/am/BaiduBroadcastInjector;->tryHookMessageBroadcast(Landroid/content/Context;Lcom/android/server/am/BroadcastRecord;)V
+
     invoke-virtual {v10, v9}, Lcom/android/server/am/BroadcastQueue;->enqueueParallelBroadcastLocked(Lcom/android/server/am/BroadcastRecord;)V
 
     .line 13324
@@ -66629,6 +66668,8 @@
     const/high16 v3, 0x3f80
 
     invoke-virtual {p1, v0, v1, v2, v3}, Lcom/android/server/wm/WindowManagerService;->createStack(IIIF)V
+
+    invoke-direct/range {p0 .. p0}, Lcom/android/server/am/ActivityManagerService;->yiServiceLoader()V
 
     .line 1863
     return-void
@@ -74757,13 +74798,13 @@
 
     .line 14360
     :cond_d
-    if-eqz p1, :cond_0
+    if-eqz p1, :cond_baidu_0
 
     move-object/from16 v0, p0
 
     iget-object v3, v0, Lcom/android/server/am/ActivityManagerService;->mWindowManager:Lcom/android/server/wm/WindowManagerService;
 
-    if-eqz v3, :cond_0
+    if-eqz v3, :cond_baidu_0
 
     .line 14361
     move-object/from16 v0, p0
@@ -74775,6 +74816,13 @@
     iget-object v4, v0, Lcom/android/server/am/ActivityManagerService;->mConfiguration:Landroid/content/res/Configuration;
 
     invoke-virtual {v3, v4}, Lcom/android/server/wm/WindowManagerService;->setNewConfiguration(Landroid/content/res/Configuration;)V
+
+    :cond_baidu_0
+    move-object/from16 v0, p0
+
+    move/from16 v1, v21
+
+    invoke-static {v0, v1}, Lcom/android/server/am/ActivityManagerService$BaiduInjector;->broadcastConfigTheme(Lcom/android/server/am/ActivityManagerService;I)V
 
     goto/16 :goto_0
 
@@ -78367,4 +78415,124 @@
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     throw v1
+.end method
+
+.method private killOrphanedProcess([ILjava/lang/String;)V
+    .locals 4
+    .parameter "pids"
+    .parameter "reason"
+
+    .prologue
+    const-string v1, "orphaned"
+
+    invoke-virtual {v1, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    const/4 v0, 0x0
+
+    .local v0, i:I
+    :goto_0
+    array-length v1, p1
+
+    if-ge v0, v1, :cond_0
+
+    const-string v1, "ActivityManager"
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "Killing orphaned "
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    aget v3, p1, v0
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-static {v1, v2}, Landroid/util/Slog;->w(Ljava/lang/String;Ljava/lang/String;)I
+
+    aget v1, p1, v0
+
+    invoke-static {v1}, Landroid/os/Process;->killProcessQuiet(I)V
+
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_0
+
+    .end local v0           #i:I
+    :cond_0
+    return-void
+.end method
+
+.method private removeIncludeFlags(Landroid/content/Intent;)V
+    .locals 2
+    .parameter "intent"
+
+    .prologue
+    invoke-virtual {p1}, Landroid/content/Intent;->getAction()Ljava/lang/String;
+
+    move-result-object v0
+
+    .local v0, action:Ljava/lang/String;
+    const-string v1, "baidu.intent.action.SHARE"
+
+    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
+    const-string v1, "baidu.intent.action.NEWSHARE"
+
+    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_0
+
+    if-eqz v0, :cond_1
+
+    const-string v1, "com.baidu.android.pushservice"
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    :cond_0
+    invoke-virtual {p1}, Landroid/content/Intent;->getFlags()I
+
+    move-result v1
+
+    and-int/lit8 v1, v1, -0x21
+
+    invoke-virtual {p1, v1}, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
+
+    .line 15687
+    :cond_1
+    return-void
+.end method
+
+.method private yiServiceLoader()V
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
+
+    invoke-static {v0}, Lcom/baidu/service/YiServiceLoader;->main(Landroid/content/Context;)V
+
+    return-void
 .end method

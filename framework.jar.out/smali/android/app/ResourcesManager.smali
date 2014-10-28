@@ -2252,9 +2252,9 @@
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     .line 195
-    new-instance v9, Landroid/content/res/AssetManager;
+    new-instance v9, Landroid/content/res/BaiduAssetManager;
 
-    invoke-direct {v9}, Landroid/content/res/AssetManager;-><init>()V
+    invoke-direct {v9}, Landroid/content/res/BaiduAssetManager;-><init>()V
 
     .line 196
     .local v9, assets:Landroid/content/res/AssetManager;
@@ -2433,14 +2433,14 @@
 
     .line 238
     :cond_7
-    new-instance v8, Landroid/content/res/Resources;
+    new-instance v8, Landroid/content/res/BaiduResources;
 
     .end local v8           #r:Landroid/content/res/Resources;
     move-object/from16 v12, p6
 
     move-object/from16 v13, p7
 
-    invoke-direct/range {v8 .. v13}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;Landroid/os/IBinder;)V
+    invoke-direct/range {v8 .. v13}, Landroid/content/res/BaiduResources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;Landroid/os/IBinder;)V
 
     .line 239
     .restart local v8       #r:Landroid/content/res/Resources;
@@ -2606,9 +2606,9 @@
     const/4 v7, 0x1
 
     .line 278
-    new-instance v1, Landroid/content/res/AssetManager;
+    new-instance v1, Landroid/content/res/BaiduAssetManager;
 
-    invoke-direct {v1}, Landroid/content/res/AssetManager;-><init>()V
+    invoke-direct {v1}, Landroid/content/res/BaiduAssetManager;-><init>()V
 
     .line 279
     .local v1, assets:Landroid/content/res/AssetManager;
@@ -2691,13 +2691,13 @@
     invoke-direct {p0, v1, v8}, Landroid/app/ResourcesManager;->attachIconAssets(Landroid/content/res/AssetManager;Landroid/content/res/ThemeConfig;)Z
 
     .line 307
-    new-instance v0, Landroid/content/res/Resources;
+    new-instance v0, Landroid/content/res/BaiduResources;
 
     move-object v4, p5
 
     move-object v5, p6
 
-    invoke-direct/range {v0 .. v5}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;Landroid/os/IBinder;)V
+    invoke-direct/range {v0 .. v5}, Landroid/content/res/BaiduResources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;Landroid/os/IBinder;)V
 
     .line 308
     .local v0, r:Landroid/content/res/Resources;
@@ -2726,3 +2726,4 @@
     .restart local v3       #config:Landroid/content/res/Configuration;
     goto :goto_2
 .end method
+
