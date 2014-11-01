@@ -126,7 +126,7 @@ vendor_modify_jars := framework framework2 pm services telephony-common android.
 ##############################################################################
 # baidu_remove_apps: those baidu apk you want remove 
 #-----------------------------------------------------------------------------
-# baidu_remove_apps := BaiduUserFeedback.apk
+baidu_remove_apps := NfcNci.apk
 
 ##############################################################################
 # baidu_modify_apps: which base the baidu's apk
