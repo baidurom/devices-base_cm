@@ -2459,13 +2459,3 @@
 
     goto :goto_0
 .end method
-
-.method static synthetic access$iget-mKeyguardShowing-38c164(Lcom/android/internal/policy/impl/GlobalActions;)Z
-    .locals 1
-    .parameter "x0"
-
-    .prologue
-    iget-boolean v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mKeyguardShowing:Z
-
-    return v0
-.end method
