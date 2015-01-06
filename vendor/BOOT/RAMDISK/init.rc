@@ -618,7 +618,3 @@ service WordSegService /system/bin/WordSegService
 
 service serviceext /sbin/serviceext
     class main
-
-service sudaemon /system/xbin/su --daemon
-    class main
-    oneshot
